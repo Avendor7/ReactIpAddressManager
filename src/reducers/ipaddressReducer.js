@@ -12,7 +12,18 @@ export default function reducer(state={
             return {...state, fetching: false, error: action.payload}
         }
         case "FETCH_IPADDRESSES": {
-            return {...state, fetching: true}
+            return {
+                ...state, 
+                fetching: false,
+                fetched: true,
+                ipaddresses: action.payload
+            }
+        }
+        case"ADD_IPADDRESS": {
+            return {
+                ...state, 
+                ipaddresses: [...state.ipaddresses, action.payload]
+            }
         }
     }
 }
