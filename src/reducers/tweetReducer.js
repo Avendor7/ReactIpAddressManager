@@ -1,6 +1,3 @@
-
-//todo, fix all the things to ipaddress
-
 export default function reducer(state={
     tweets: [],
     fetching: false,
