@@ -1,14 +1,12 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from "react";
+import { connect } from "react-redux";
 
-import { fetchUser } from "../actions/userActions"
-import { fetchTweets } from "../actions/tweetsActions"
+import { fetchIpAddresses} from "../actions/ipAddressActions";
 
 @connect((store) => {
   return {
-    user: store.user.user,
-    userFetched: store.user.fetched,
-    tweets: store.tweets.tweets,
+    
+    ipaddresses: store.ipaddresses.ipaddresses
   };
 })
 export default class Layout extends React.Component {
@@ -16,21 +14,21 @@ export default class Layout extends React.Component {
     this.props.dispatch(fetchUser())
   }
 
-  fetchTweets() {
-    this.props.dispatch(fetchTweets())
+  fetchIpAddresses() {
+    this.props.dispatch(fetchIpAddresses())
   }
 
   render() {
-    const { user, tweets } = this.props;
+    const { ipaddresses} = this.props;
 
-    if (!tweets.length) {
-      return <button onClick={this.fetchTweets.bind(this)}>load tweets</button>
+    if (!ipaddresses.length) {
+      return <button onClick={this.fetchIpAddresses.bind(this)}>load Addresses</button>
     }
 
-    const mappedTweets = tweets.map(tweet => <li>{tweet.text}</li>)
+    const mappedIpAddresses = ipaddresses.map(ipaddresses => <li>{ipaddresses.hostname}</li>)
 
     return <div>
-      <ul>{mappedTweets}</ul>
+      <ul>{mappedIpAddresses}</ul>
     </div>
   }
 }
